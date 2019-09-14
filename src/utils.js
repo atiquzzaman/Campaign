@@ -23,3 +23,31 @@ export const isStartDateSameOrBeforeEndDate = (startDate, endDate) => {
 export const isDateBetween = (date, startDate, endDate) => {
     return date.isBetween(startDate, endDate, null, '[]');
 }
+
+export const processList = (campList) => {
+    const aList = []
+    const errorList = []
+    const currentDate = getDate(new Date())
+
+    for (const camp of campList) {
+        const startDate = getDate(camp.startDate)
+        const endDate = getDate(camp.endDate)
+
+        if (!startDate.isValid()) {
+            errorList.push({ data: camp, error: 'Invalid start date' })
+        } else if (!endDate.isValid()) {
+            errorList.push({ data: camp, error: 'Invalid end date' })
+        } else if (!isStartDateSameOrBeforeEndDate(startDate, endDate)) {
+            errorList.push({ data: camp, error: 'End date is before Start Date' })
+        } else {
+            aList.push({
+                name: camp.name,
+                startDate: changeDateFormat(camp.startDate),
+                endDate: changeDateFormat(camp.endDate),
+                active: isDateBetween(currentDate, startDate, endDate),
+                budget: `${formatBudget(camp.Budget).toUpperCase()} USD`
+            })
+        }
+    }
+    return [aList, errorList]
+}
