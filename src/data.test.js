@@ -98,3 +98,15 @@ describe('Filter tests', function () {
         expect(result.length).toBe(1)
     })
 })
+
+describe('Sort list', function () {
+    it('it checks sort list', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/09/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.sortByName(campList)
+
+        expect(result[0].name).toBe('Campaign')
+    })
+})
