@@ -23,6 +23,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <h1>Campaign List</h1>
         <DataTable
           dataList={processedList[0]}
         />
