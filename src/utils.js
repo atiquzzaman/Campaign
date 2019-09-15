@@ -57,8 +57,8 @@ export const processList = (campList) => {
 }
 
 export const filterList = (campList, { filterName = '', filterStartDate = '', filterEndDate = '' }) => {
-    const startDate = filterStartDate.length > 0 && getOutputDate(filterStartDate)
-    const endDate = filterEndDate.length > 0 && getOutputDate(filterEndDate)
+    const startDate = filterStartDate && getOutputDate(filterStartDate)
+    const endDate = filterEndDate && getOutputDate(filterEndDate)
     const regexp = new RegExp(filterName, 'i')
 
     return campList.filter(camp => {
@@ -75,21 +75,5 @@ export const filterList = (campList, { filterName = '', filterStartDate = '', fi
         }
 
         return hasName && (hasStartDate || hasEndDate)
-    })
-}
-
-export const sortByName = (campList) => {
-    return campList.sort((a, b) => {
-        var nameA = a.name.toUpperCase();
-        var nameB = b.name.toUpperCase();
-
-        if (nameA < nameB) {
-            return -1;
-        }
-        if (nameA > nameB) {
-            return 1;
-        }
-
-        return 0;
     })
 }

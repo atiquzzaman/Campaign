@@ -34,3 +34,27 @@ span.active::before, span.inactive::before {
 .table-row {
   text-align: left !important
 }
+
+div.list-filter {
+  display: flex;
+  margin-bottom:24px
+}
+
+.datepicker {
+  margin-right:8px;
+  height:24px;
+  font-size: 16px;
+  padding:0 8px;
+  border:2px solid #474747
+}
+.filter-name {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+.filter-name input {
+  height:24px;
+  font-size: 16px;
+  padding:0 8px;
+  border:2px solid #474747
+}
