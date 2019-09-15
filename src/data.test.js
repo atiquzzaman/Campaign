@@ -1,6 +1,5 @@
 import * as utils from './utils'
 
-
 describe('Data processing tests', function () {
     it('it checks processed data without error', function () {
         const campList = [
@@ -40,5 +39,62 @@ describe('Data processing tests', function () {
 
         expect(result[1][0].data.startDate).toBe('13/19/2017')
         expect(result[1][0].error).toBe('Invalid start date')
+    })
+})
+
+describe('Filter tests', function () {
+    it('it checks no filtering', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/09/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.filterList(campList, {})
+
+        expect(result.length).toBe(2)
+    })
+    it('it checks filter by name', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/09/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.filterList(campList, { filterName: 'vav' })
+
+        expect(result.length).toBe(1)
+    })
+    it('it checks filter by startDate', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/10/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.filterList(campList, { filterStartDate: '19/09/2017', filterEndDate: '20/09/2017' })
+
+        expect(result.length).toBe(1)
+    })
+    it('it checks filter by endDate', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/10/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.filterList(campList, { filterStartDate: '01/02/2018', filterEndDate: '30/03/2018' })
+
+        expect(result.length).toBe(2)
+    })
+    it('it checks filter between startDate and endDate', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/10/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.filterList(campList, { filterStartDate: '01/09/2017', filterEndDate: '30/03/2018' })
+
+        expect(result.length).toBe(2)
+    })
+    it('it checks filter by name, startDate and endDate', function () {
+        const campList = [
+            { "id": 1, "name": "Divavu", "startDate": "19/09/2017", "endDate": "09/03/2018", "active": false, "budget": '88.4K USD' },
+            { "id": 2, "name": "Campaign", "startDate": "12/10/2017", "endDate": "29/03/2018", "active": true, "budget": '88.4M USD' }
+        ]
+        const result = utils.filterList(campList, { filterName: 'cam', filterStartDate: '01/09/2017', filterEndDate: '30/03/2018' })
+
+        expect(result.length).toBe(1)
     })
 })

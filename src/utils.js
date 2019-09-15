@@ -12,6 +12,10 @@ export const getDate = (date) => {
     return moment(date, INPUT_DATE_FORMAT)
 }
 
+export const getOutputDate = (date) => {
+    return moment(date, OUTPUT_DATE_FORMAT)
+}
+
 export const changeDateFormat = (dateStr) => {
     return moment(dateStr, INPUT_DATE_FORMAT).format(OUTPUT_DATE_FORMAT)
 }
@@ -50,4 +54,26 @@ export const processList = (campList) => {
         }
     }
     return [aList, errorList]
+}
+
+export const filterList = (campList, { filterName = '', filterStartDate = '', filterEndDate = '' }) => {
+    const startDate = filterStartDate.length > 0 && getOutputDate(filterStartDate)
+    const endDate = filterEndDate.length > 0 && getOutputDate(filterEndDate)
+    const regexp = new RegExp(filterName, 'i')
+
+    return campList.filter(camp => {
+        const campStartDate = getOutputDate(camp.startDate)
+        const campEndDate = getOutputDate(camp.endDate)
+
+        const hasName = camp.name.match(regexp)
+        let hasStartDate = true
+        let hasEndDate = true
+
+        if (startDate && endDate) {
+            hasStartDate = isDateBetween(campStartDate, startDate, endDate)
+            hasEndDate = isDateBetween(campEndDate, startDate, endDate)
+        }
+
+        return hasName && (hasStartDate || hasEndDate)
+    })
 }
