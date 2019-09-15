@@ -4,11 +4,11 @@ import moment from 'moment'
 export const INPUT_DATE_FORMAT = 'M/D/YYYY'
 export const OUTPUT_DATE_FORMAT = 'DD/MM/YYYY'
 
-export const formatBudget = (amount) => {
-    return numeral(amount).format('(0[.]0a)')
+export const formatNumber = (number) => {
+    return numeral(number).format('(0[.]0a)')
 }
 
-export const getDate = (date) => {
+export const getInputDate = (date) => {
     return moment(date, INPUT_DATE_FORMAT)
 }
 
@@ -31,11 +31,11 @@ export const isDateBetween = (date, startDate, endDate) => {
 export const processList = (campList) => {
     const aList = []
     const errorList = []
-    const currentDate = getDate(new Date())
+    const currentDate = getInputDate(new Date())
 
     for (const camp of campList) {
-        const startDate = getDate(camp.startDate)
-        const endDate = getDate(camp.endDate)
+        const startDate = getInputDate(camp.startDate)
+        const endDate = getInputDate(camp.endDate)
 
         if (!startDate.isValid()) {
             errorList.push({ data: camp, error: 'Invalid start date' })
@@ -49,7 +49,7 @@ export const processList = (campList) => {
                 startDate: changeDateFormat(camp.startDate),
                 endDate: changeDateFormat(camp.endDate),
                 active: isDateBetween(currentDate, startDate, endDate),
-                budget: `${formatBudget(camp.Budget).toUpperCase()} USD`
+                budget: `${formatNumber(camp.Budget).toUpperCase()} USD`
             })
         }
     }
