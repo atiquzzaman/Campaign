@@ -31,3 +31,29 @@
     transform: rotate(360deg);
   }
 }
+
+span.active, span.inactive {
+  display:flex;
+  align-items: center;
+}
+span.active::before, span.inactive::before {
+  content: '';
+  background-color:white;
+  border-radius: 50%;
+  height:12px;
+  width:12px;
+  margin:0 8px
+}
+.active::before {
+  background-color:green !important;
+}
+.inactive::before {
+  background-color:red !important;
+}
+.table-header{
+  text-align: left !important;
+  font-weight: bold
+}
+.table-row {
+  text-align: left !important
+}
