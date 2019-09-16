@@ -7,12 +7,12 @@ describe('Data processing tests', function () {
         ]
         const result = utils.processList(campList)
 
-        expect(result[0].length).toBe(1)
-        expect(result[1].length).toBe(0)
+        expect(result.goodList.length).toBe(1)
+        expect(result.badList.length).toBe(0)
 
-        expect(result[0][0].startDate).toBe('19/09/2017')
-        expect(result[0][0].active).toBe(false)
-        expect(result[0][0].budget).toBe('88.4K USD')
+        expect(result.goodList[0].startDate).toBe('19/09/2017')
+        expect(result.goodList[0].active).toBe(false)
+        expect(result.goodList[0].budget).toBe('88.4K USD')
     })
 
     it('it checks processed data with error', function () {
@@ -22,11 +22,11 @@ describe('Data processing tests', function () {
         ]
         const result = utils.processList(campList)
 
-        expect(result[0].length).toBe(1)
-        expect(result[1].length).toBe(1)
+        expect(result.goodList.length).toBe(1)
+        expect(result.badList.length).toBe(1)
 
-        expect(result[1][0].data.startDate).toBe('9/19/2017')
-        expect(result[1][0].error).toBe('End date is before Start Date')
+        expect(result.badList[0].data.startDate).toBe('9/19/2017')
+        expect(result.badList[0].error).toBe('End date is before Start Date')
     })
 
     it('it checks invalid start date error', function () {
@@ -35,10 +35,22 @@ describe('Data processing tests', function () {
         ]
         const result = utils.processList(campList)
 
-        expect(result[1].length).toBe(1)
+        expect(result.badList.length).toBe(1)
 
-        expect(result[1][0].data.startDate).toBe('13/19/2017')
-        expect(result[1][0].error).toBe('Invalid start date')
+        expect(result.badList[0].data.startDate).toBe('13/19/2017')
+        expect(result.badList[0].error).toBe('Invalid start date')
+    })
+
+    it('it checks invalid end date error', function () {
+        const campList = [
+            { "id": 2, "name": "John Doe", "startDate": "12/19/2017", "endDate": "13/9/2018", "Budget": 88377 }
+        ]
+        const result = utils.processList(campList)
+
+        expect(result.badList.length).toBe(1)
+
+        expect(result.badList[0].data.endDate).toBe('13/9/2018')
+        expect(result.badList[0].error).toBe('Invalid end date')
     })
 })
 

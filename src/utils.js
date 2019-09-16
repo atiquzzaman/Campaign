@@ -53,7 +53,10 @@ export const processList = (campList) => {
             })
         }
     }
-    return [aList, errorList]
+    return {
+        goodList: aList,
+        badList: errorList
+    }
 }
 
 export const filterList = (campList, { filterName = '', filterStartDate = '', filterEndDate = '' }) => {
