@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   width:970px;
+  padding:0 32px;
   margin:32px auto;
 }
 
@@ -41,10 +42,8 @@ div.list-filter {
 }
 
 .datepicker {
-  margin-right:8px;
   height:24px;
   font-size: 16px;
-  padding:0 8px;
   border:2px solid #474747
 }
 .filter-name {
@@ -55,6 +54,24 @@ div.list-filter {
 .filter-name input {
   height:24px;
   font-size: 16px;
-  padding:0 8px;
-  border:2px solid #474747
+  border:2px solid #474747;
+}
+
+.filter-outer {
+  position: relative;
+}
+.filter-outer input {
+  padding-right:24px;
+}
+.filter-outer:nth-child(2) {
+  margin-left:8px
+}
+.filter-outer .clear {
+  position: absolute;
+  right:0;
+  top:-1px;
+  width:24px;
+  color:#474747;
+  font-size: 24px;
+  cursor: pointer;
 }
