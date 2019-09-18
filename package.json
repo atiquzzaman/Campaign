@@ -17,10 +17,14 @@
     "deploy:prod": "react-scripts build && ",
     "test": "react-scripts test --watchAll=false --coverage",
     "test:watch": "react-scripts test",
-    "open:cov": "yarn test && opener coverage/index.html"
+    "open:cov": "yarn test && opener coverage/index.html",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
   },
   "jest": {
     "collectCoverageFrom": [
@@ -49,6 +53,10 @@
   "devDependencies": {
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "opener": "^1.5.1"
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-config-react-app": "^5.0.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "opener": "^1.5.1",
+    "prettier": "^1.18.2"
   }
 }

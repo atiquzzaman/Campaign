@@ -6,26 +6,31 @@ import './App.css'
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       campaignList: []
     }
   }
   componentDidMount() {
-    window.AddCampaigns = (newCampaigns) => {
+    window.AddCampaigns = newCampaigns => {
       return this.processNewCampaigns(newCampaigns)
     }
   }
 
-  processNewCampaigns = (newCampaigns) => {
+  processNewCampaigns = newCampaigns => {
     try {
       if (newCampaigns.length === 0) {
         throw new Error('Input array cannot be empty!')
       }
-      const processedList = utils.processList(newCampaigns, this.state.campaignList)
+      const processedList = utils.processList(
+        newCampaigns,
+        this.state.campaignList
+      )
 
       if (processedList.goodList.length > 0) {
-        console.log(`${processedList.goodList.length} new campaign(s) has bee added.`)
+        console.log(
+          `${processedList.goodList.length} new campaign(s) has bee added.`
+        )
 
         this.setState(state => ({
           campaignList: state.campaignList.concat(processedList.goodList)
@@ -34,7 +39,11 @@ class App extends React.Component {
         console.log('No campain was added.')
       }
       if (processedList.badList.length > 0) {
-        console.error(`Failed to add the following campaign(s): ${JSON.stringify(processedList.badList)}`)
+        console.error(
+          `Failed to add the following campaign(s): ${JSON.stringify(
+            processedList.badList
+          )}`
+        )
       } else {
         console.log('No error found.')
       }
@@ -47,12 +56,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Campaign List</h1>
-        <DataTable
-          dataList={this.state.campaignList}
-        />
+        <DataTable dataList={this.state.campaignList} />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

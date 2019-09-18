@@ -1,50 +1,52 @@
 .App {
   text-align: center;
-  width:970px;
-  padding:0 32px;
-  margin:32px auto;
+  width: 970px;
+  padding: 0 32px;
+  margin: 32px auto;
 }
 
 h1 {
   color: rgb(17, 60, 153);
-  margin-bottom:64px
+  margin-bottom: 64px;
 }
 
-span.active, span.inactive {
-  display:flex;
+span.active,
+span.inactive {
+  display: flex;
   align-items: center;
 }
-span.active::before, span.inactive::before {
+span.active::before,
+span.inactive::before {
   content: '';
-  background-color:white;
+  background-color: white;
   border-radius: 50%;
-  height:12px;
-  width:12px;
-  margin:0 8px
+  height: 12px;
+  width: 12px;
+  margin: 0 8px;
 }
 .active::before {
-  background-color:green !important;
+  background-color: green !important;
 }
 .inactive::before {
-  background-color:red !important;
+  background-color: red !important;
 }
-.table-header{
+.table-header {
   text-align: left !important;
-  font-weight: bold
+  font-weight: bold;
 }
 .table-row {
-  text-align: left !important
+  text-align: left !important;
 }
 
 div.list-filter {
   display: flex;
-  margin-bottom:24px
+  margin-bottom: 24px;
 }
 
 .datepicker {
-  height:24px;
+  height: 24px;
   font-size: 16px;
-  border:2px solid #474747
+  border: 2px solid #474747;
 }
 .filter-name {
   display: flex;
@@ -52,26 +54,26 @@ div.list-filter {
   justify-content: flex-end;
 }
 .filter-name input {
-  height:24px;
+  height: 24px;
   font-size: 16px;
-  border:2px solid #474747;
+  border: 2px solid #474747;
 }
 
 .filter-outer {
   position: relative;
 }
 .filter-outer input {
-  padding-right:24px;
+  padding-right: 24px;
 }
 .filter-outer:nth-child(2) {
-  margin-left:8px
+  margin-left: 8px;
 }
 .filter-outer .clear {
   position: absolute;
-  right:0;
-  top:-1px;
-  width:24px;
-  color:#474747;
+  right: 0;
+  top: -1px;
+  width: 24px;
+  color: #474747;
   font-size: 24px;
   cursor: pointer;
 }

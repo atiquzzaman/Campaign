@@ -4,12 +4,12 @@ import DatePicker from 'react-datepicker'
 import ReactTable from 'react-table'
 
 import 'react-table/react-table.css'
-import "react-datepicker/dist/react-datepicker.css";
-import { filterList } from '../utils';
+import 'react-datepicker/dist/react-datepicker.css'
+import { filterList } from '../utils'
 
 export default class DataTable extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       filterName: '',
       filterStartDate: '',
@@ -34,12 +34,11 @@ export default class DataTable extends React.Component {
   }
 
   render() {
-    const filteredList = filterList(this.props.dataList,
-      {
-        filterName: this.state.filterName,
-        filterStartDate: this.state.filterStartDate,
-        filterEndDate: this.state.filterEndDate
-      })
+    const filteredList = filterList(this.props.dataList, {
+      filterName: this.state.filterName,
+      filterStartDate: this.state.filterStartDate,
+      filterEndDate: this.state.filterEndDate
+    })
 
     const columns = [
       {
@@ -84,7 +83,7 @@ export default class DataTable extends React.Component {
           <div className="filter-outer">
             <DatePicker
               id="StartDate"
-              className='datepicker'
+              className="datepicker"
               selected={this.state.filterStartDate}
               onChange={date => this.setStartDate(date)}
               dateFormat="dd/MM/yyyy"
@@ -92,42 +91,71 @@ export default class DataTable extends React.Component {
               startDate={this.state.filterStartDate}
               endDate={this.state.filterEndDate}
               maxDate={this.state.filterEndDate}
-              placeholderText="Start Date" />
+              placeholderText="Start Date"
+            />
 
-            {this.state.filterStartDate && <span id="ClearStartDate" className="clear" onClick={() => {
-              this.setState({
-                filterStartDate: ''
-              })
-            }}>&times;</span>}
+            {this.state.filterStartDate && (
+              <span
+                id="ClearStartDate"
+                className="clear"
+                onClick={() => {
+                  this.setState({
+                    filterStartDate: ''
+                  })
+                }}
+              >
+                &times;
+              </span>
+            )}
           </div>
           <div className="filter-outer">
             <DatePicker
               id="EndDate"
-              className='datepicker'
+              className="datepicker"
               selected={this.state.filterEndDate}
               onChange={date => this.setEndDate(date)}
               dateFormat="dd/MM/yyyy"
               selectsEnd
               endDate={this.state.filterEndDate}
               minDate={this.state.filterStartDate}
-              placeholderText="End Date" />
+              placeholderText="End Date"
+            />
 
-            {this.state.filterEndDate && <span id="ClearEndDate" className="clear" onClick={() => {
-              this.setState({
-                filterEndDate: ''
-              })
-            }}>&times;</span>}
+            {this.state.filterEndDate && (
+              <span
+                id="ClearEndDate"
+                className="clear"
+                onClick={() => {
+                  this.setState({
+                    filterEndDate: ''
+                  })
+                }}
+              >
+                &times;
+              </span>
+            )}
           </div>
           <div className="filter-outer filter-name">
-            <input id="FilterByName" placeholder="Search by name"
+            <input
+              id="FilterByName"
+              placeholder="Search by name"
               value={this.state.filterName}
-              onChange={(e) => this.setName(e.target.value)} />
+              onChange={e => this.setName(e.target.value)}
+            />
 
-            {this.state.filterName.length > 0 && <span id="ClearName" className="clear" onClick={() => {
-              this.setState({
-                filterName: ''
-              })
-            }}>&times;</span>}
+            {this.state.filterName.length > 0 && (
+              <span
+                id="ClearName"
+                className="clear"
+                onClick={() => {
+                  this.setState({
+                    filterName: ''
+                  })
+                }}
+              >
+                &times;
+              </span>
+            )}
           </div>
         </div>
         <ReactTable
@@ -138,7 +166,7 @@ export default class DataTable extends React.Component {
           resizable={false}
           defaultSorted={[
             {
-              id: "name",
+              id: 'name',
               desc: false
             }
           ]}
@@ -146,8 +174,7 @@ export default class DataTable extends React.Component {
           pageSizeOptions={[10, 20, 30]}
           defaultPageSize={10}
         />
-
       </>
-    );
+    )
   }
 }
