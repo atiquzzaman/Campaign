@@ -78,15 +78,15 @@ export const filterList = (
   campList,
   { filterName = '', filterStartDate = '', filterEndDate = '' }
 ) => {
+  const nameUpper = filterName.toUpperCase()
   const startDate = filterStartDate && getOutputDate(filterStartDate)
   const endDate = filterEndDate && getOutputDate(filterEndDate)
-  const regexp = new RegExp(filterName, 'i')
 
   return campList.filter(camp => {
     const campStartDate = getOutputDate(camp.startDate)
     const campEndDate = getOutputDate(camp.endDate)
 
-    const hasName = camp.name.match(regexp)
+    const hasName = camp.name.toUpperCase().includes(nameUpper)
     let hasStartDate = true
     let hasEndDate = true
 
