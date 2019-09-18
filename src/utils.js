@@ -28,28 +28,42 @@ export const isDateBetween = (date, startDate, endDate) => {
     return date.isBetween(startDate, endDate, null, '[]');
 }
 
-export const processList = (campList) => {
+const getBudget = (budget) => {
+    if (budget) {
+        return `${formatNumber(budget).toUpperCase()} USD`
+    } else {
+        return ''
+    }
+}
+
+export const processList = (newList, currentList = []) => {
     const aList = []
     const errorList = []
     const currentDate = getInputDate(new Date())
 
-    for (const camp of campList) {
+    const ids = currentList.map(a => a.id)
+
+    for (const camp of newList) {
+        if (Object.entries(camp).length === 0 && camp.constructor === Object) continue
         const startDate = getInputDate(camp.startDate)
         const endDate = getInputDate(camp.endDate)
 
-        if (!startDate.isValid()) {
-            errorList.push({ data: camp, error: 'Invalid start date' })
+        if (ids.includes(camp.id)) {
+            errorList.push({ data: camp, error: 'Id already exists' })
+        } else if (!startDate.isValid()) {
+            errorList.push({ data: camp, error: 'Invalid Start Date' })
         } else if (!endDate.isValid()) {
-            errorList.push({ data: camp, error: 'Invalid end date' })
+            errorList.push({ data: camp, error: 'Invalid End Date' })
         } else if (!isStartDateSameOrBeforeEndDate(startDate, endDate)) {
-            errorList.push({ data: camp, error: 'End date is before Start Date' })
+            errorList.push({ data: camp, error: 'End Date is before Start Date' })
         } else {
             aList.push({
+                id: camp.id,
                 name: camp.name,
                 startDate: changeDateFormat(camp.startDate),
                 endDate: changeDateFormat(camp.endDate),
                 active: isDateBetween(currentDate, startDate, endDate),
-                budget: `${formatNumber(camp.Budget).toUpperCase()} USD`
+                budget: getBudget(camp.Budget)
             })
         }
     }
