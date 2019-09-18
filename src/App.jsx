@@ -13,24 +13,35 @@ class App extends React.Component {
   }
   componentDidMount() {
     window.AddCampaigns = (newCampaigns) => {
-      try {
-        const processedList = utils.processList(newCampaigns)
-
-        if (processedList.goodList.length > 0) {
-          console.log(`${processedList.goodList.length} new campaign(s) has bee added.`)
-          this.setState(state => ({
-            campaignList: state.campaignList.concat(processedList.goodList)
-          }))
-        }
-        if (processedList.badList.length > 0) {
-          console.error(`Failed to add the following campaign(s): ${processedList.badList} `)
-          console.error(processedList.badList)
-          return
-        }
-      } catch (e) {
-        return e
-      }
+      return this.processNewCampaigns(newCampaigns)
     }
+  }
+
+  processNewCampaigns = (newCampaigns) => {
+    try {
+      if (newCampaigns.length === 0) {
+        throw new Error('Input array cannot be empty!')
+      }
+      const processedList = utils.processList(newCampaigns, this.state.campaignList)
+
+      if (processedList.goodList.length > 0) {
+        console.log(`${processedList.goodList.length} new campaign(s) has bee added.`)
+
+        this.setState(state => ({
+          campaignList: state.campaignList.concat(processedList.goodList)
+        }))
+      } else {
+        console.log('No campain was added.')
+      }
+      if (processedList.badList.length > 0) {
+        console.error(`Failed to add the following campaign(s): ${JSON.stringify(processedList.badList)}`)
+      } else {
+        console.log('No error found.')
+      }
+    } catch (e) {
+      return e
+    }
+    return 'Done! Please see above for details.'
   }
   render() {
     return (

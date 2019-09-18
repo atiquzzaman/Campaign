@@ -82,6 +82,7 @@ export default class DataTable extends React.Component {
             <>
                 <div className="list-filter">
                     <DatePicker
+                        id="StartDate"
                         className='datepicker'
                         selected={this.state.filterStartDate}
                         onChange={date => this.setStartDate(date)}
@@ -91,6 +92,7 @@ export default class DataTable extends React.Component {
                         endDate={this.state.filterEndDate}
                         placeholderText="Start Date" />
                     <DatePicker
+                        id="EndDate"
                         className='datepicker'
                         selected={this.state.filterEndDate}
                         onChange={date => this.setEndDate(date)}
