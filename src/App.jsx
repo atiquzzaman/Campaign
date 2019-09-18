@@ -1,5 +1,5 @@
 import React from 'react'
-import * as utils from './utils'
+import * as utils from './utils/utils'
 import DataTable from './components/DataTable'
 
 import './App.css'
