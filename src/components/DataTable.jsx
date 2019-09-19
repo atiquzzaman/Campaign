@@ -5,7 +5,7 @@ import ReactTable from 'react-table'
 
 import 'react-table/react-table.css'
 import 'react-datepicker/dist/react-datepicker.css'
-import { filterList } from '../utils/utils'
+import { filterList } from '../utils'
 
 export default class DataTable extends React.Component {
   constructor(props) {
