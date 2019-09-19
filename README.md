@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/atiquzzaman/Campaign.svg?branch=master)](https://travis-ci.org/atiquzzaman/Campaign)
+[![codecov](https://codecov.io/gh/atiquzzaman/Campaign/branch/master/graph/badge.svg)](https://codecov.io/gh/atiquzzaman/Campaign)
+
 # Campaign
 
 Campagin is a react application that demonstrates a list of campaigns.
