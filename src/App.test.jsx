@@ -34,7 +34,7 @@ describe('Invokes AddCampaigns', () => {
       '1 new campaign(s) has bee added.'
     )
     expect(global.console.error).toHaveBeenCalledWith(
-      'Failed to add the following campaign(s): [{"data":{"id":10,"name":"Realbridge","startDate":"3/5/2018","endDate":"10/2/2017 ","Budget":505602},"error":"End Date is before Start Date"}]'
+      'Failed to add the following data: [{"data":{"id":10,"name":"Realbridge","startDate":"3/5/2018","endDate":"10/2/2017 ","Budget":505602},"error":"End Date is before Start Date"}]'
     )
     expect(returnVal).toBe('Done! Please see above for details.')
     wrap.unmount()
@@ -55,7 +55,9 @@ describe('Invokes AddCampaigns', () => {
     const returnVal = wrap.instance().processNewCampaigns(dummyList)
 
     expect(global.console.log).toHaveBeenCalledWith('No campain was added.')
-    expect(global.console.log).toHaveBeenCalledWith('No error found.')
+    expect(global.console.error).toHaveBeenCalledWith(
+      'Failed to add the following data: [{"data":{},"error":"Invalid data format"},{"data":{},"error":"Invalid data format"}]'
+    )
     expect(returnVal).toBe('Done! Please see above for details.')
     wrap.unmount()
   })

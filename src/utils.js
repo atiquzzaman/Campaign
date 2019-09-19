@@ -28,7 +28,7 @@ export const isDateBetween = (date, startDate, endDate) => {
   return date.isBetween(startDate, endDate, null, '[]')
 }
 
-const getBudget = budget => {
+export const getBudget = budget => {
   if (budget) {
     return `${formatNumber(budget).toUpperCase()} USD`
   } else {
@@ -44,8 +44,13 @@ export const processList = (newList, currentList = []) => {
   const ids = currentList.map(a => a.id)
 
   for (const camp of newList) {
-    if (Object.entries(camp).length === 0 && camp.constructor === Object)
+    if (
+      (Object.entries(camp).length === 0 && camp.constructor === Object) ||
+      !(camp.name && camp.startDate && camp.endDate && camp.Budget)
+    ) {
+      errorList.push({ data: camp, error: 'Invalid data format' })
       continue
+    }
     const startDate = getInputDate(camp.startDate)
     const endDate = getInputDate(camp.endDate)
 

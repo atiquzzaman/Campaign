@@ -19,7 +19,7 @@ class App extends React.Component {
 
   processNewCampaigns = newCampaigns => {
     try {
-      if (newCampaigns.length === 0) {
+      if (!Array.isArray(newCampaigns) || newCampaigns.length === 0) {
         throw new Error('Input array cannot be empty!')
       }
       const processedList = utils.processList(
@@ -40,7 +40,7 @@ class App extends React.Component {
       }
       if (processedList.badList.length > 0) {
         console.error(
-          `Failed to add the following campaign(s): ${JSON.stringify(
+          `Failed to add the following data: ${JSON.stringify(
             processedList.badList
           )}`
         )

@@ -1,7 +1,7 @@
 import * as utils from './utils'
 
-describe('Data processing tests', function() {
-  it('checks processed data without error', function() {
+describe('Data processing tests', () => {
+  it('checks processed data without error', () => {
     const campList = [
       {
         id: 1,
@@ -20,22 +20,18 @@ describe('Data processing tests', function() {
     expect(result.goodList[0].active).toBe(false)
     expect(result.goodList[0].budget).toBe('88.4K USD')
   })
-  it('checks empty budget', function() {
-    const campList = [
-      { id: 1, name: 'Divavu', startDate: '9/19/2017', endDate: '3/9/2018' }
-    ]
-    const result = utils.processList(campList)
-    expect(result.goodList[0].budget).toBe('')
-  })
-  it('checks empty budget', function() {
-    const campList = [
-      { id: 1, name: 'Divavu', startDate: '9/19/2017', endDate: '3/9/2018' }
-    ]
-    const result = utils.processList(campList)
-    expect(result.goodList[0].budget).toBe('')
+
+  it('checks budget', () => {
+    const result = utils.getBudget(1234)
+    expect(result).toBe('1.2K USD')
   })
 
-  it('checks duplicate ID', function() {
+  it('checks empty budget', () => {
+    const result = utils.getBudget('')
+    expect(result).toBe('')
+  })
+
+  it('checks duplicate ID', () => {
     const campList = [
       {
         id: 1,
@@ -57,7 +53,7 @@ describe('Data processing tests', function() {
     expect(result.badList[0].error).toBe('Id already exists')
   })
 
-  it('checks processed data with error', function() {
+  it('checks processed data with error', () => {
     const campList = [
       {
         id: 1,
@@ -83,7 +79,7 @@ describe('Data processing tests', function() {
     expect(result.badList[0].error).toBe('End Date is before Start Date')
   })
 
-  it('checks invalid start date error', function() {
+  it('checks invalid start date error', () => {
     const campList = [
       {
         id: 2,
@@ -101,7 +97,7 @@ describe('Data processing tests', function() {
     expect(result.badList[0].error).toBe('Invalid Start Date')
   })
 
-  it('checks invalid end date error', function() {
+  it('checks invalid end date error', () => {
     const campList = [
       {
         id: 2,
@@ -120,8 +116,8 @@ describe('Data processing tests', function() {
   })
 })
 
-describe('Filter tests', function() {
-  it('checks no filtering', function() {
+describe('Filter tests', () => {
+  it('checks no filtering', () => {
     const campList = [
       {
         id: 1,
@@ -144,7 +140,7 @@ describe('Filter tests', function() {
 
     expect(result.length).toBe(2)
   })
-  it('checks filter by name', function() {
+  it('checks filter by name', () => {
     const campList = [
       {
         id: 1,
@@ -167,7 +163,7 @@ describe('Filter tests', function() {
 
     expect(result.length).toBe(1)
   })
-  it('checks filter by startDate', function() {
+  it('checks filter by startDate', () => {
     const campList = [
       {
         id: 1,
@@ -193,7 +189,7 @@ describe('Filter tests', function() {
 
     expect(result.length).toBe(1)
   })
-  it('checks filter by endDate', function() {
+  it('checks filter by endDate', () => {
     const campList = [
       {
         id: 1,
@@ -219,7 +215,7 @@ describe('Filter tests', function() {
 
     expect(result.length).toBe(2)
   })
-  it('checks filter between startDate and endDate', function() {
+  it('checks filter between startDate and endDate', () => {
     const campList = [
       {
         id: 1,
@@ -245,7 +241,7 @@ describe('Filter tests', function() {
 
     expect(result.length).toBe(2)
   })
-  it('checks filter by name, startDate and endDate', function() {
+  it('checks filter by name, startDate and endDate', () => {
     const campList = [
       {
         id: 1,
