@@ -1,0 +1,9 @@
+coverage:
+  status:
+    patch:
+      default:
+        target: 90
+        threshold: 0.5
+ignore:
+  - 'src/index.jsx'
+  - 'src/serviceWorker.js'
