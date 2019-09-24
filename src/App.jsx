@@ -36,7 +36,7 @@ class App extends React.Component {
           campaignList: state.campaignList.concat(processedList.goodList)
         }))
       } else {
-        console.log('No campain was added.')
+        console.log('No campaign was added.')
       }
       if (processedList.badList.length > 0) {
         console.error(
